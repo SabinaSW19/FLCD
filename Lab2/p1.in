@@ -1,7 +1,6 @@
 begin
-int $x,y,z,mini;
-x=-11-12;
-x="a;
+int x,y,z,mini;
+char s="a";
 input(x);
 input(y);
 input(z);

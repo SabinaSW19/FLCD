@@ -1,0 +1,11 @@
+begin
+int nr,n,sum=0;
+input(n);
+while(n!=0)
+begin
+input(nr);
+sum=sum+nr;
+n=n-1;
+end
+print(sum);
+end

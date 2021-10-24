@@ -1,0 +1,18 @@
+begin
+int x,y,gcd;
+input(x);
+input(y);
+while(x!=y)
+begin
+if(x>y)
+begin
+x=x-y;
+end
+else
+begin
+y=y-x;
+end
+end
+gcd=x;
+print(gcd);
+end

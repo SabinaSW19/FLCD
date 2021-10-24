@@ -21,35 +21,37 @@ public class SymTable {
         return sum%this.capacity;
     }
 
-    public Map<Integer,Integer> find(String id){
+    public List<Integer> find(String id){
         int hash=this.hash(id);
         List<String> list=this.table.get(hash);
-        HashMap<Integer,Integer> map=new HashMap<>();
+        List<Integer> map=new ArrayList<>();
         for(int i=0; i<list.size(); i++)
             if(list.get(i).equals(id))
             {
-                map.put(hash,i);
+                map.add(hash);
+                map.add(i);
                 return map;
             }
-        map.put(-1,-1);
+        map.add(-1);
+        map.add(-1);
         return map;
     }
 
-    public int add(String id) {
+    public List<Integer> add(String id) {
         int hash = hash(id);
-        if(!find(id).containsValue(-1))
-            return hash;
+        if(!find(id).contains(-1))
+            return find(id);
         else
             this.table.get(hash).add(id);
-        return hash;
+        return find(id);
     }
 
     @Override
     public String toString() {
-        return "SymTable{" +
-                "capacity=" + capacity +
-                ", table=" + table +
-                '}';
+        String symTableString="";
+        for(Map.Entry<Integer, List<String>> i:this.table.entrySet())
+            symTableString+=i.getKey()+"   "+i.getValue()+"\n";
+        return symTableString;
     }
 
 }

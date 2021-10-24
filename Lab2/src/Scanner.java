@@ -27,7 +27,7 @@ public class Scanner {
         while(index<line.length()) {
             if(line.charAt(index)=='"')
             {
-                    //for strings
+                //for strings
                 HashMap<String,Integer> pair=addString(line,index);
                 tokens.add((String) pair.keySet().toArray()[0]);
                 index= (int) pair.values().toArray()[0];
@@ -74,7 +74,12 @@ public class Scanner {
                     else
                         if (isConstant("" + line.charAt(index)))
                         {
-                            String sth=""+line.charAt(index);
+                            String sth="";
+                            if(tokens.get(tokens.size() - 1).equals("-") && (tokens.get(tokens.size()-2).equals("=") || tokens.get(tokens.size()-2).equals("<") || tokens.get(tokens.size()-2).equals(">") || tokens.get(tokens.size() - 2).equals("<=") || tokens.get(tokens.size() - 2).equals(">="))) {
+                                tokens.remove(tokens.size() - 1);
+                                sth+="-";
+                            }
+                            sth+=line.charAt(index);
                             int cnt = index;
                             if(index<line.length()-1) {
                                 cnt += 1;
@@ -89,11 +94,33 @@ public class Scanner {
                             }
                             tokens.add(sth);
                         }
-                        else {
-                            //this will go as error
-                            if(line.charAt(index)!=' ')
-                                tokens.add("" + line.charAt(index));
-                        }
+                        else
+                            if(line.charAt(index)=='!' && line.charAt(index+1)=='=' ) {
+                                String sth=""+line.charAt(index)+line.charAt(index+1);
+                                index+=1;
+                                tokens.add(sth);
+                            }
+                            else
+                                {
+                                //this will go as error
+                                String sth=""+line.charAt(index);
+                                if(line.charAt(index)!=' ') {
+                                    int cnt = index;
+                                    if(index<line.length()-1) {
+                                        cnt += 1;
+                                        while(line.charAt(index)!='(' && line.charAt(index)!=')' && line.charAt(index)!='[' && line.charAt(index)!=']' && line.charAt(index)!=',' && line.charAt(index)!=';') {
+                                            sth += "" + line.charAt(cnt);
+                                            index+=1;
+                                            if(cnt<line.length()-1) {
+                                                cnt += 1;
+                                            }
+                                            else
+                                                break; }
+                                        }
+                                    tokens.add(sth);
+                                    }
+                                }
+
                         index += 1;
 
             }
@@ -108,12 +135,13 @@ public class Scanner {
         while (index < line.length() && count < 2) {
             if (line.charAt(index) == '"')
                 count += 1;
-            if(count==2)
+            if(count==2) {
+                token+="\"";
                 break;
+            }
             token += line.charAt(index);
             index+=1;
         }
-        token+="\"";
         index+=1;
         pair.put(token,index);
         return pair;

@@ -1,6 +1,7 @@
 begin
 int x,y,z,mini;
 char s="a";
+x=-11-12;
 input(x);
 input(y);
 input(z);

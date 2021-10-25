@@ -74,25 +74,34 @@ public class Scanner {
                     else
                         if (isConstant("" + line.charAt(index)))
                         {
-                            String sth="";
-                            if(tokens.get(tokens.size() - 1).equals("-") && (tokens.get(tokens.size()-2).equals("=") || tokens.get(tokens.size()-2).equals("<") || tokens.get(tokens.size()-2).equals(">") || tokens.get(tokens.size() - 2).equals("<=") || tokens.get(tokens.size() - 2).equals(">="))) {
-                                tokens.remove(tokens.size() - 1);
-                                sth+="-";
-                            }
-                            sth+=line.charAt(index);
-                            int cnt = index;
-                            if(index<line.length()-1) {
-                                cnt += 1;
-                                while (isConstant(""+line.charAt(cnt))) {
-                                    sth+=""+line.charAt(cnt);
-                                    index+=1;
-                                    if(cnt<line.length()-1) {
-                                        cnt += 1;
+                            if(index!=0) {
+                                String sth = "";
+                                if (tokens.get(tokens.size() - 1).equals("-") && (tokens.get(tokens.size() - 2).equals("=") || tokens.get(tokens.size() - 2).equals("<") || tokens.get(tokens.size() - 2).equals(">") || tokens.get(tokens.size() - 2).equals("<=") || tokens.get(tokens.size() - 2).equals(">="))) {
+                                    tokens.remove(tokens.size() - 1);
+                                    sth += "-";
+                                }
+                                sth += line.charAt(index);
+                                int cnt = index;
+                                if (index < line.length() - 1) {
+                                    cnt += 1;
+                                    while (isConstant("" + line.charAt(cnt))) {
+                                        sth += "" + line.charAt(cnt);
+                                        index += 1;
+                                        if (cnt < line.length() - 1) {
+                                            cnt += 1;
+                                        } else
+                                            break;
                                     }
-                                    else
-                                        break; }
+                                }
+                                if(!isIdentifier(""+line.charAt(index+1)))
+                                    tokens.add(sth);
+                                else
+                                {
+                                    sth+=line.charAt(index+1);
+                                    tokens.add(sth);
+                                    index+=1;
+                                }
                             }
-                            tokens.add(sth);
                         }
                         else
                             if(line.charAt(index)=='!' && line.charAt(index+1)=='=' ) {

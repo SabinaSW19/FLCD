@@ -1,6 +1,9 @@
 begin
 int $x,y,z,mini;
 char s="a;
+x=0b;
+y=-0;
+x=045;
 input(x);
 input(y);
 input(z);

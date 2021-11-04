@@ -17,6 +17,12 @@ public class Main {
         Scanner scanner=new Scanner();
         PIF pif=new PIF();
         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\sdumi\\OneDrive\\Desktop\\InfoYear3\\Formal Languages and Compiler Design\\Lab2Git\\FLCD\\Lab2\\p1.in"));
+        FA faIdentifier = new FA();
+        String fileIdentifier="C:\\Users\\sdumi\\OneDrive\\Desktop\\InfoYear3\\Formal Languages and Compiler Design\\Lab2Git\\FLCD\\Lab2\\identifiers.in";
+        faIdentifier=faIdentifier.readFromFile(fileIdentifier);
+        FA faConstant = new FA();
+        String fileConstant="C:\\Users\\sdumi\\OneDrive\\Desktop\\InfoYear3\\Formal Languages and Compiler Design\\Lab2Git\\FLCD\\Lab2\\constants.in";
+        faConstant=faConstant.readFromFile(fileConstant);
         String text = reader.readLine();
         int lineNumber=1;
         int cnt=0;
@@ -27,10 +33,10 @@ public class Main {
                 if (scanner.isAtom(i))
                     pif.add(scanner.scanner.get(i), Arrays.asList( -1,-1));
                 else
-                    if (scanner.isIdentifier(i))
+                    if (faIdentifier.checkIfSequenceIsAccepted(i))
                         pif.add(0, symTable.add(i));
                     else
-                        if (scanner.isConstant(i))
+                        if (faConstant.checkIfSequenceIsAccepted(i) || scanner.isCharConstant(i))
                             pif.add(1, symTable.add(i));
 
                         else {cnt=1;

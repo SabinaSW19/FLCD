@@ -158,13 +158,17 @@ public class Scanner {
 
     public boolean isIdentifier(String token)
     {
-        return token.matches("^[a-zA-Z]([a-zA-Z]|[0-9]){0,255}$");
+        return token.matches("^[a-zA-Z]([a-zA-Z]|[0-9]*)$");
     }
 
     public boolean isConstant(String token)
     {
         if(token.matches("^(0|[+-]?[1-9][0-9]*)$"))
             return true;
+        return token.charAt(0) == '"' && token.charAt(token.length() - 1) == '"';
+    }
+    public boolean isCharConstant(String token)
+    {
         return token.charAt(0) == '"' && token.charAt(token.length() - 1) == '"';
     }
 

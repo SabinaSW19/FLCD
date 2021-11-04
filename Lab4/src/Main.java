@@ -8,7 +8,7 @@ public class Main {
     private static FA readFromFile() throws IOException {
         List<String> Q=new ArrayList<>();
         List<String> E=new ArrayList<>();
-        HashMap<String,List<String>> d=new HashMap<>();
+        HashMap<List<String>,List<String>> d=new HashMap<>();
         String q0 = null;
         List<String> F=new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\sdumi\\OneDrive\\Desktop\\InfoYear3\\Formal Languages and Compiler Design\\Lab4\\src\\FA.in"));
@@ -49,25 +49,36 @@ public class Main {
                 for (int i = 0; i < count; i++)
                 {
                     String firstPart;
-                    if(indexFirst==0)
-                        firstPart=first[indexFirst];
+                    List<String> key=new ArrayList<>();
+                    if(indexFirst==0) {
+                        firstPart = first[indexFirst];
+                        String[] firstKey=firstPart.split(",");
+                        key.add(firstKey[0]);
+                        key.add(firstKey[1]);
+                    }
                     else
                     {
                         firstPart=first[indexFirst].split(",")[1];
-                        firstPart+=",";
-                        firstPart+=first[indexFirst].split(",")[2];
+                        key.add(firstPart);
+                        //System.out.println(key);
+                        key.add(first[indexFirst].split(",")[2]);
+
 
                     }
+                    //System.out.println(key);
                     String secondPart=first[indexFirst+1].split(",")[0];
-                    if(d.containsKey(firstPart)) {
-                        d.get(firstPart).add(secondPart);
+                    if(d.containsKey(key)) {
+                        d.get(key).add(secondPart);
                     }
                     else {
                         List<String> value = new ArrayList<>();
                         value.add(secondPart);
-                        d.put(firstPart,value);
+                        //System.out.println(key);
+                        //System.out.println(value);
+                        d.put(key,value);
                     }
                     indexFirst+=1;
+                    //System.out.println(indexFirst);
                 }
 
             }
@@ -90,7 +101,7 @@ public class Main {
 
     }
 
-    private static void displayElements(FA fa) {
+    private static void displayElements(FA fa) throws IOException {
         while (true) {
             System.out.println("1.States.");
             System.out.println("2.Alphabet. ");
@@ -122,6 +133,10 @@ public class Main {
                     System.out.println(fa.F.toString());
                     break;
                 }
+                case "0":
+                {
+                    printMenu(fa);
+                }
                 default:
                     break;
 
@@ -130,14 +145,11 @@ public class Main {
         }
     }
 
-    private static void verify() {
-    }
-
-    public static void main(String[] args) throws IOException {
-        FA fa=new FA();
+    private static void printMenu(FA fa) throws IOException {
         while (true) {
             System.out.println("1.Read FA from file.");
             System.out.println("2.Print FA. ");
+            System.out.println("3.Check if a sequence is accepted by the DFA. ");
             System.out.println("Choose something:");
             Scanner in = new Scanner(System.in);
             String s = in.nextLine();
@@ -151,7 +163,7 @@ public class Main {
                     break;
                 }
                 case "3": {
-                    verify();
+                    verify(fa);
                     break;
                 }
                 default:
@@ -159,5 +171,19 @@ public class Main {
 
             }
         }
+    }
+
+    private static void verify(FA fa) {
+        System.out.println("Enter a sequence.");
+        Scanner in = new Scanner(System.in);
+        String s = in.nextLine();
+        System.out.println(fa.checkIfSequenceIsAccepted(s));
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        FA fa=new FA();
+        printMenu(fa);
+
     }
 }

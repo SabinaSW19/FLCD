@@ -68,7 +68,8 @@ public class Main {
                     //System.out.println(key);
                     String secondPart=first[indexFirst+1].split(",")[0];
                     if(d.containsKey(key)) {
-                        d.get(key).add(secondPart);
+                        if(!d.get(key).contains(secondPart))
+                            d.get(key).add(secondPart);
                     }
                     else {
                         List<String> value = new ArrayList<>();

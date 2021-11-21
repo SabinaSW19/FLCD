@@ -30,24 +30,22 @@ public class Grammar {
         String text=reader.readLine();
         while(text!=null)
         {
-            String[] elements = text.split("=");//see what we have on the line
+            String[] elements = text.split("\\{");//see what we have on the line
             if(elements[0].equals("N"))
             {
-                String list=elements[1].replace("{","");
-                list=list.replace("}","");
+                String list=elements[1].replace("}","");
                 String[] first=list.split(",");
                 Collections.addAll(N, first);
             }
             if(elements[0].equals("E"))
             {
-                String list=elements[1].replace("{","");
-                list=list.replace("}","");
+                String list=elements[1].replace("}","");
                 String[] first=list.split(",");
+                //System.out.println(elements[1]);
                 Collections.addAll(E, first);
             }
             if(elements[0].equals("P")) {
-                String list = elements[1].replace("{", "");
-                list = list.replace("}", "");
+                String list = elements[1].replace("}", "");
 
                 int index = list.indexOf("->");
                 String copy = list;

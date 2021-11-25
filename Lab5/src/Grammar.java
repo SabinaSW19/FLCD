@@ -9,8 +9,19 @@ import java.util.*;
 public class Grammar {
     List<String> N;
     List<String> E;
-    HashMap<String, List<String>> P;
+    HashMap<String, List<List<String>>> P;
     String S;
+
+    public Grammar(List<String> n, List<String> e, HashMap<String, List<List<String>>> p, String s) {
+        N = n;
+        E = e;
+        P = p;
+        S = s;
+    }
+
+    public Grammar() {
+
+    }
 
     public List<String> getN() {
         return N;
@@ -28,11 +39,11 @@ public class Grammar {
         E = e;
     }
 
-    public HashMap<String, List<String>> getP() {
+    public HashMap<String, List<List<String>>> getP() {
         return P;
     }
 
-    public void setP(HashMap<String, List<String>> p) {
+    public void setP(HashMap<String, List<List<String>>> p) {
         P = p;
     }
 
@@ -42,17 +53,6 @@ public class Grammar {
 
     public void setS(String s) {
         S = s;
-    }
-
-    public Grammar(List<String> n, List<String> e, HashMap<String, List<String>> p, String s) {
-        N = n;
-        E = e;
-        P = p;
-        S = s;
-    }
-
-    public Grammar() {
-
     }
 
     public void readFromFile(String file) throws IOException {
@@ -66,12 +66,12 @@ public class Grammar {
             String[] elements = text.split("\\{");//see what we have on the line
             if (elements[0].equals("N")) {
                 String list = elements[1].replace("}", "");
-                String[] first = list.split(",");
+                String[] first = list.split("\\^");
                 Collections.addAll(N, first);
             }
             if (elements[0].equals("E")) {
                 String list = elements[1].replace("}", "");
-                String[] first = list.split(",");
+                String[] first = list.split("\\^");
                 //System.out.println(elements[1]);
                 Collections.addAll(E, first);
             }
@@ -94,15 +94,28 @@ public class Grammar {
                     if (indexFirst == 0) {
                         firstPart = first[indexFirst];
                     } else {
-                        firstPart = first[indexFirst].split(",")[1];
+                        firstPart = first[indexFirst].split("\\^")[1];
                     }
-                    String[] second = first[indexFirst + 1].split(",");
+                    String[] second = first[indexFirst + 1].split("\\^");
                     String[] secondPart = second[0].split("\\|");
+                    List<String> listStrings;
+                    List<List<String>> listStringSecond=new ArrayList<>();
                     if (P.containsKey(firstPart)) {
-                        P.get(firstPart).addAll(Arrays.asList(secondPart));
+                        for(String s:secondPart)
+                        {
+                            String[] part=s.split(" ");
+                            listStrings=new ArrayList<>(Arrays.asList(part));
+                            listStringSecond.addAll(Collections.singleton(listStrings));
+                        }
+                        P.get(firstPart).addAll(listStringSecond);
                     } else {
-                        List<String> value = new ArrayList<>(Arrays.asList(secondPart));
-                        P.put(firstPart, value);
+                        for(String s:secondPart)
+                        {
+                            String[] part=s.split(" ");
+                            listStrings = new ArrayList<>(Arrays.asList(part));
+                            listStringSecond.addAll(Collections.singleton(listStrings));
+                        }
+                        P.put(firstPart, listStringSecond);
                     }
                     indexFirst += 1;
                 }

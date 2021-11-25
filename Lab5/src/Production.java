@@ -3,6 +3,16 @@
 import java.util.List;
 
 public class Production {
+    private String leftHandSide;
+    private List<String> rightHandSide;
+    private int dotPosition;
+
+    public Production(String leftHandSide, List<String> rightHandSide) {
+        this.leftHandSide = leftHandSide;
+        this.rightHandSide = rightHandSide;
+        this.dotPosition = 0;
+    }
+
     public String getLeftHandSide() {
         return leftHandSide;
     }
@@ -27,10 +37,6 @@ public class Production {
         this.dotPosition = dotPosition;
     }
 
-    private String leftHandSide;
-    private List<String> rightHandSide;
-    private int dotPosition;
-
     @Override
     public String toString() {
         return "Production{" +
@@ -38,11 +44,5 @@ public class Production {
                 ", rightHandSide=" + rightHandSide +
                 ", dotPosition=" + dotPosition +
                 '}';
-    }
-
-    public Production(String leftHandSide, List<String> rightHandSide) {
-        this.leftHandSide = leftHandSide;
-        this.rightHandSide = rightHandSide;
-        this.dotPosition = 0;
     }
 }

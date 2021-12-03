@@ -39,10 +39,8 @@ public class Production {
 
     @Override
     public String toString() {
-        return "Production{" +
-                "leftHandSide='" + leftHandSide + '\'' +
-                ", rightHandSide=" + rightHandSide +
-                ", dotPosition=" + dotPosition +
-                '}';
+        String s="";
+        s+=this.leftHandSide+"->"+this.rightHandSide+", dot position:"+this.dotPosition;
+        return s;
     }
 }

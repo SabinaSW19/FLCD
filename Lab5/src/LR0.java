@@ -29,7 +29,7 @@ public class LR0 {
                 if (grammar.getN().contains(leftHandSide)) {
                     for (List<String> rightHandSide : grammar.P.get(leftHandSide)) {
                         Production production = new Production(leftHandSide, rightHandSide);
-                        if (!closure.contains(production)) {
+                        if (!checkContains(closure,production)) {
                             closure.add(production);
                             queue.add(production);
                         }
@@ -51,6 +51,7 @@ public class LR0 {
         }
         return closure(newStates);
     }
+
 
     public List<List<Production>> canonicalCollection() {
         List<List<Production>> canonicalCollection = new ArrayList<>();
@@ -106,6 +107,24 @@ public class LR0 {
         }
         return false;
     }
+    private boolean checkContains(List<Production> productions, Production production) {
+        for (Production p : productions) {
+            if (p.getLeftHandSide().equals(production.getLeftHandSide()) && p.getRightHandSide().equals(production.getRightHandSide()) && p.getDotPosition()==production.getDotPosition()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public String stateToString(List<List<Production>> states)
+    {
+        String s="";
+        for(int i=0;i<states.size();i++) {
+            s += "state " + i + " " + states.get(i);
+            s+="\n";
+        }
+
+        return s;
+    }
 }
 

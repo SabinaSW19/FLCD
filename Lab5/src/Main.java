@@ -5,7 +5,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException {
         Grammar grammar = new Grammar();
-        String file = "src\\g4.txt";
+        String file = "src\\g2.txt";
         grammar.readFromFile(file);
         grammar.printNonTerminals();
         grammar.printTerminals();
@@ -36,6 +36,9 @@ public class Main {
 //        System.out.println();
 //        System.out.println(s2);
 //        System.out.println(lr0.goTo(s2,"A"));
-        System.out.println(lr0.canonicalCollection());
+        //System.out.println(lr0.canonicalCollection());
+        List<List<Production>> states=lr0.canonicalCollection();
+        System.out.println(lr0.stateToString(states));
+
     }
 }

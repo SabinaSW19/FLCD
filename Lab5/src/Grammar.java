@@ -146,6 +146,49 @@ public class Grammar {
             System.out.println(this.P.get(nonTerminal));
     }
 
+    public LinkedHashMap<HashMap<String, List<String>>,Integer> numberProduction()
+    {
+        LinkedHashMap<HashMap<String, List<String>>,Integer> number=new LinkedHashMap<>();
+        int index=1;
+        HashMap<String, List<List<String>>> productions=this.getP();
+        for(Map.Entry<String,List<List<String>>>entry : productions.entrySet())
+        {
+            String key=entry.getKey();
+            if(!key.equals("S'")) {
+                List<List<String>> values = productions.get(key);
+                for (List<String> value : values) {
+
+                    HashMap<String, List<String>> elem = new HashMap<>();
+                    elem.put(key, value);
+                    number.put(elem,index);
+                    index += 1;
+                }
+            }
+        }
+        return number;
+    }
+    public LinkedHashMap<Integer,HashMap<String, List<String>>> numberProduction2()
+    {
+        LinkedHashMap<Integer,HashMap<String, List<String>>> number=new LinkedHashMap<>();
+        int index=1;
+        HashMap<String, List<List<String>>> productions=this.getP();
+        for(Map.Entry<String,List<List<String>>>entry : productions.entrySet())
+        {
+            String key=entry.getKey();
+            if(!key.equals("S'")) {
+                List<List<String>> values = productions.get(key);
+                for (List<String> value : values) {
+
+                    HashMap<String, List<String>> elem = new HashMap<>();
+                    elem.put(key, value);
+                    number.put(index,elem);
+                    index += 1;
+                }
+            }
+        }
+        return number;
+    }
+
     public boolean isCFG() {
         for (String i : this.P.keySet())
             if (!this.N.contains(i))

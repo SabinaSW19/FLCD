@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -39,7 +41,21 @@ public class Main {
         //System.out.println(lr0.canonicalCollection());
         List<List<Item>> states=lr0.canonicalCollection();
         System.out.println(lr0.stateToString(states));
-        System.out.println(lr0.generateLR0Table(states));
+        Map<List<String>, List<List<String>>> table=lr0.generateLR0Table(states);
+        //System.out.println(lr0.generateLR0Table(states));
+        System.out.println(lr0.tableToString(table));
+        System.out.println(grammar.numberProduction().toString());
+        List<String> word=new ArrayList<>();
+        word.add("a");
+        word.add("b");
+        word.add("b");
+        word.add("c");
+        //word.add("end");
+//        word.add("c");
+        Stack<String> outputStack=lr0.outputStack(word,table);
+        System.out.println(outputStack);
+        //System.out.println(lr0.productionsInOutput(outputStack));
+        lr0.printParsingTable(lr0.productionsInOutput(outputStack));
 
     }
 }

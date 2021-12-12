@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -99,19 +97,17 @@ public class Grammar {
                     String[] second = first[indexFirst + 1].split("\\^");
                     String[] secondPart = second[0].split("\\|");
                     List<String> listStrings;
-                    List<List<String>> listStringSecond=new ArrayList<>();
+                    List<List<String>> listStringSecond = new ArrayList<>();
                     if (P.containsKey(firstPart)) {
-                        for(String s:secondPart)
-                        {
-                            String[] part=s.split(" ");
-                            listStrings=new ArrayList<>(Arrays.asList(part));
+                        for (String s : secondPart) {
+                            String[] part = s.split(" ");
+                            listStrings = new ArrayList<>(Arrays.asList(part));
                             listStringSecond.addAll(Collections.singleton(listStrings));
                         }
                         P.get(firstPart).addAll(listStringSecond);
                     } else {
-                        for(String s:secondPart)
-                        {
-                            String[] part=s.split(" ");
+                        for (String s : secondPart) {
+                            String[] part = s.split(" ");
                             listStrings = new ArrayList<>(Arrays.asList(part));
                             listStringSecond.addAll(Collections.singleton(listStrings));
                         }
@@ -146,42 +142,39 @@ public class Grammar {
             System.out.println(this.P.get(nonTerminal));
     }
 
-    public LinkedHashMap<HashMap<String, List<String>>,Integer> numberProduction()
-    {
-        LinkedHashMap<HashMap<String, List<String>>,Integer> number=new LinkedHashMap<>();
-        int index=1;
-        HashMap<String, List<List<String>>> productions=this.getP();
-        for(Map.Entry<String,List<List<String>>>entry : productions.entrySet())
-        {
-            String key=entry.getKey();
-            if(!key.equals("S'")) {
+    public LinkedHashMap<HashMap<String, List<String>>, Integer> numberProduction() {
+        LinkedHashMap<HashMap<String, List<String>>, Integer> number = new LinkedHashMap<>();
+        int index = 1;
+        HashMap<String, List<List<String>>> productions = this.getP();
+        for (Map.Entry<String, List<List<String>>> entry : productions.entrySet()) {
+            String key = entry.getKey();
+            if (!key.equals("S'")) {
                 List<List<String>> values = productions.get(key);
                 for (List<String> value : values) {
 
                     HashMap<String, List<String>> elem = new HashMap<>();
                     elem.put(key, value);
-                    number.put(elem,index);
+                    number.put(elem, index);
                     index += 1;
                 }
             }
         }
         return number;
     }
-    public LinkedHashMap<Integer,HashMap<String, List<String>>> numberProduction2()
-    {
-        LinkedHashMap<Integer,HashMap<String, List<String>>> number=new LinkedHashMap<>();
-        int index=1;
-        HashMap<String, List<List<String>>> productions=this.getP();
-        for(Map.Entry<String,List<List<String>>>entry : productions.entrySet())
-        {
-            String key=entry.getKey();
-            if(!key.equals("S'")) {
+
+    public LinkedHashMap<Integer, HashMap<String, List<String>>> numberProduction2() {
+        LinkedHashMap<Integer, HashMap<String, List<String>>> number = new LinkedHashMap<>();
+        int index = 1;
+        HashMap<String, List<List<String>>> productions = this.getP();
+        for (Map.Entry<String, List<List<String>>> entry : productions.entrySet()) {
+            String key = entry.getKey();
+            if (!key.equals("S'")) {
                 List<List<String>> values = productions.get(key);
                 for (List<String> value : values) {
 
                     HashMap<String, List<String>> elem = new HashMap<>();
                     elem.put(key, value);
-                    number.put(index,elem);
+                    number.put(index, elem);
                     index += 1;
                 }
             }

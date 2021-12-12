@@ -1,0 +1,8 @@
+   Action    S   A   a   b   c   
+0  Shift     1   -   2   -   -   
+1  Accept    -   -   -   -   -   
+2  Shift     -   3   -   4   5   
+3  Reduce 3  -   -   -   -   -   
+4  Shift     -   6   -   4   5   
+5  Reduce 2  -   -   -   -   -   
+6  Reduce 1  -   -   -   -   -   

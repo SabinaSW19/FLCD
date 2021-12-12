@@ -138,6 +138,7 @@ public class LR0 {
                 List<Item> items = canonicalCollection.get(i);
                 if (items.size() == 1 &&
                         Objects.equals(items.get(0).getLeftHandSide(), "S'") &&
+                        Objects.equals(items.get(0).getRightHandSide().get(0), this.starting) &&
                         items.get(0).getDotPosition() == 1) {
                     lr0Table.put(new ArrayList<>(Arrays.asList(String.valueOf(i), "Accept")), new ArrayList<>());
                 } else {
@@ -407,7 +408,7 @@ public class LR0 {
         List<String> rhs = new ArrayList<>();
         for (Map.Entry<String, List<String>> entry : production.entrySet())
             rhs = entry.getValue();
-        List<ParserOutput> auxRows = new ArrayList<>();
+        List<ParserOutput> rows = new ArrayList<>();
         for (int i = 0; i < rhs.size(); i++) {
             ParserOutput row = new ParserOutput();
             row.setIndex(rowIndex);
@@ -415,17 +416,16 @@ public class LR0 {
             row.setSymbol(rhs.get(i));
             //System.out.println(rhs);
             row.setParent(parent);
-
             if (i < rhs.size() - 1) {
                 row.setRightSibling(rowIndex);
             } else {
                 row.setRightSibling(-1);
             }
             //System.out.println(row);
-            auxRows.add(row);
+            rows.add(row);
         }
-        tree.addAll(auxRows);
-        for (ParserOutput row : auxRows) {
+        tree.addAll(rows);
+        for (ParserOutput row : rows) {
             if (grammar.getN().contains(row.getSymbol())) {
                 currentProductionIndex = currentProductionIndex + 1;
                 getRecursive(tree, productions, row.getIndex(), rowIndex, currentProductionIndex);

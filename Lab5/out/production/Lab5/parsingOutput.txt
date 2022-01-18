@@ -1,21 +1,10 @@
-ParserOutput{index=0, parent=-1, rightSibling=-1, symbol='program'}
-ParserOutput{index=1, parent=0, rightSibling=2, symbol='begin'}
-ParserOutput{index=2, parent=0, rightSibling=3, symbol='stmtlist'}
-ParserOutput{index=3, parent=0, rightSibling=-1, symbol='end'}
-ParserOutput{index=4, parent=2, rightSibling=5, symbol='stmtlist'}
-ParserOutput{index=5, parent=2, rightSibling=-1, symbol='stmt'}
-ParserOutput{index=6, parent=4, rightSibling=-1, symbol='simplestmt'}
-ParserOutput{index=7, parent=6, rightSibling=-1, symbol='iostmt'}
-ParserOutput{index=8, parent=7, rightSibling=9, symbol='print'}
-ParserOutput{index=9, parent=7, rightSibling=10, symbol='('}
-ParserOutput{index=10, parent=7, rightSibling=11, symbol='identifier'}
-ParserOutput{index=11, parent=7, rightSibling=12, symbol=')'}
-ParserOutput{index=12, parent=7, rightSibling=-1, symbol=';'}
-ParserOutput{index=6, parent=5, rightSibling=-1, symbol='iostmt'}
-ParserOutput{index=7, parent=6, rightSibling=8, symbol='print'}
-ParserOutput{index=8, parent=6, rightSibling=9, symbol='('}
-ParserOutput{index=9, parent=6, rightSibling=10, symbol='identifier'}
-ParserOutput{index=10, parent=6, rightSibling=11, symbol=')'}
-ParserOutput{index=11, parent=6, rightSibling=-1, symbol=';'}
+ParserOutput{index=0, parent=-1, rightSibling=-1, symbol='S'}
+ParserOutput{index=1, parent=0, rightSibling=2, symbol='a'}
+ParserOutput{index=2, parent=0, rightSibling=-1, symbol='A'}
+ParserOutput{index=3, parent=2, rightSibling=4, symbol='b'}
+ParserOutput{index=4, parent=2, rightSibling=-1, symbol='A'}
+ParserOutput{index=5, parent=4, rightSibling=6, symbol='b'}
+ParserOutput{index=6, parent=4, rightSibling=-1, symbol='A'}
+ParserOutput{index=7, parent=6, rightSibling=-1, symbol='c'}
 
- Productions used [7, 6, 29, 2, 18, 6, 30, 26, 4, 22, 5, 30, 26, 4, 22, 5, 29, 1, 23, 3, 24, 21, 3, 24, 12, 3, 24, 21, 3, 24, 12, 3, 24, 6, 29, 2, 17, 6, 29, 2, 17, 6, 29, 2, 17, 6, 28, 10, 8, 6, 28, 10, 8, 6, 28, 10, 8, 5, 28, 10, 8]
+ Productions used [3, 1, 1, 2]

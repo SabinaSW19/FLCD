@@ -308,7 +308,7 @@ public class LR0 {
                         //System.out.println(nextState);
                         workingStack.add(nextState);
 //                        System.out.println(inputStack);
-//                        System.out.println(workingStack);
+                        System.out.println(workingStack);
                     }
                 }
             }
@@ -431,7 +431,5 @@ public class LR0 {
                 getRecursive(tree, productions, row.getIndex(), rowIndex, currentProductionIndex);
             }
         }
-
     }
 }
-

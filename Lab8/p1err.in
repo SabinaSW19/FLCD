@@ -1,0 +1,33 @@
+begin
+int x;
+int y;
+int z;
+int mini;
+input(x);
+input(y);
+input(z);
+x=0123;
+y=12aa;
+if(x<=y)
+begin
+if(x<=z)
+begin
+mini=x;
+end
+end
+else
+begin
+if(y<=x)
+begin
+if(y<=z)
+begin
+mini=y;
+end
+end
+else
+begin
+mini=z;
+end
+end
+print(mini);
+end
